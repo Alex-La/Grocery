@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -8,8 +10,8 @@ import java.util.Objects;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id; // Это поле будет генерироваться автоматически
 
     @Column(name = "customer_name")
     private String customerName;
@@ -20,11 +22,14 @@ public class Order {
     @Column(name = "customer_phone")
     private String customerPhone;
 
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private Date createdAt; // Дата создания сгенерируется автоматически, в базе будет TIMESTAMP, возвращаться в JSON - ISOString.
+
     public Order() {
     }
 
-    public Order(long id, String customerName, String customerSurname, String customerPhone, Date createdAt) {
-        this.id = id;
+    public Order(String customerName, String customerSurname, String customerPhone) {
         this.customerName = customerName;
         this.customerSurname = customerSurname;
         this.customerPhone = customerPhone;
@@ -62,6 +67,14 @@ public class Order {
         this.customerPhone = customerPhone;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -69,6 +82,7 @@ public class Order {
         hash = 79 * hash + Objects.hashCode(this.customerName);
         hash = 79 * hash + Objects.hashCode(this.customerSurname);
         hash = 79 * hash + Objects.hashCode(this.customerPhone);
+        hash = 79 * hash + Objects.hashCode(this.createdAt);
 
         return hash; // Это простая сратегия хеширования
     }
@@ -91,6 +105,7 @@ public class Order {
         return "Order:{" + "id=" + id +
                 ", customerName='" + customerName + '\'' +
                 ", customerSurname='" + customerSurname + '\'' +
-                ", customerPhone='" + customerPhone + '}';
+                ", customerPhone='" + customerPhone + '\'' +
+                ", createdAt='" + createdAt + '}';
     }
 }
