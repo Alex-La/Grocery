@@ -1,4 +1,5 @@
-package org.example;
+package org.example.configuration;
+
 
 import org.example.model.User;
 import org.example.repository.UserRepository;
@@ -9,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class LoadDatabase {
-    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+public class DatabaseConfiguration {
+    private static final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
 
     @Bean
     CommandLineRunner initDatabase(UserRepository userRepository) {

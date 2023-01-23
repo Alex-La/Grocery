@@ -1,8 +1,8 @@
 package org.example.model;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
