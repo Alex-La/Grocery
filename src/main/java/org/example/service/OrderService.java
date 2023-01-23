@@ -43,7 +43,6 @@ public class OrderService implements IOrderService {
 
     @Override
     public void delete(Long id) {
-        Order orderToDelete = repository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
-        repository.delete(orderToDelete);
+        repository.delete(findById(id));
     }
 }

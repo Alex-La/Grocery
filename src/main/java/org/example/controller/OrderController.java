@@ -27,7 +27,7 @@ public class OrderController {
         return orderService.create(newOrder);
     }
 
-    @PutMapping("/order/${id}")
+    @PutMapping("/order/{id}")
     Order updateOrder(@RequestBody Order newOrder, @PathVariable Long id) {
         return orderService.update(newOrder, id);
     }
